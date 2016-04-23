@@ -7,12 +7,14 @@ var GameLayer = cc.LayerColor.extend({
         this.createBackground();
         this.createDragon();
         this.createLife
+        this.heart = new Heart();
+        this.heart.setPosition(new cc.Point(100, 700));
+        this.addChild(this.heart);
         this.arrows = [];
         this.createAnimal();
         this.scheduleUpdate();
         this.addKeyboardHandlers();
         return true;
-
 
     },
 
@@ -38,12 +40,6 @@ var GameLayer = cc.LayerColor.extend({
         this.rabbit.scheduleUpdate();
     },
 
-    createLife: function () {
-        this.heart = new Heart();
-        this.heart.setPosition(new cc.Point(100, 700));
-        this.addChild(this.heart);
-    },
-
     addKeyboardHandlers: function () {
         var self = this;
         cc.eventManager.addListener({
@@ -56,37 +52,40 @@ var GameLayer = cc.LayerColor.extend({
 
     onKeyDown: function (keyCode, event) {
 
-        if (keyCode == cc.KEY.space) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 5) {
-                    this.removeChild(this.arrows[i]);
-                    break;
-                } else if (this.arrows[i].number == 6) {
-                    this.removeChild(this.arrows[i]);
-                    break;
-                } else if (this.arrows[i].number == 7) {
-                    this.removeChild(this.arrows[i]);
-                    break;
-                }
-            }
-        }
         if (keyCode == cc.KEY.enter) {
+
             for (var i = 0; i < this.arrows.length; i++) {
+
                 if (this.arrows[i].number == 1) {
-                    this.removeChild(this.arrows[i]);
+                    this.arrows[i].setOpacity(0);
                     break;
                 } else if (this.arrows[i].number == 2) {
-                    this.removeChild(this.arrows[i]);
+                    this.arrows[i].setOpacity(0);
                     break;
                 } else if (this.arrows[i].number == 3) {
-                    this.removeChild(this.arrows[i]);
+                    this.arrows[i].setOpacity(0);
                     break;
                 } else if (this.arrows[i].number == 4) {
-                    this.removeChild(this.arrows[i]);
+                    this.arrows[i].setOpacity(0);
+                    break;
+                }
+            }
+        } else if (keyCode == cc.KEY.space) {
+
+            for (var i = 0; i < this.arrows.length; i++) {
+                if (this.arrows[i].number == 5) {
+                    this.arrows[i].setOpacity(0);
+                    break;
+                } else if (this.arrows[i].number == 6) {
+                    this.arrows[i].setOpacity(0);
+                    break;
+                } else if (this.arrows[i].number == 7) {
+                    this.arrows[i].setOpacity(0);
                     break;
                 }
             }
         }
+
     },
 
     onKeyUp: function (keyCode, event) {},
@@ -94,11 +93,9 @@ var GameLayer = cc.LayerColor.extend({
     update: function () {
         for (var i = 0; i < this.arrows.length; i++) {
             var pos = this.arrows[i];
-            console.log(this.arrows.length);
             if (pos.y <= -100) {
                 this.arrows[i].vy = -0.5;
                 this.arrows[i].position();
-                this.arrows[i].setOpacity(255);
             }
         }
     }
