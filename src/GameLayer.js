@@ -10,24 +10,24 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.bg);
 
         this.rabbit = new Rabbit();
-        this.rabbit.setPosition(new cc.Point(500, 180));
+        this.rabbit.setPosition(new cc.Point(500, 150));
         this.addChild(this.rabbit, 1);
         this.rabbit.scheduleUpdate();
 
         this.heart = new Heart();
-        this.heart.setPosition(new cc.Point(850, 650));
+        this.heart.setPosition(new cc.Point(100, 700));
         this.addChild(this.heart);
 
         this.arrows = [];
         for (var i = 0; i < GameLayer.NUMARROW; i++) {
             this.arrows.push(new Arrow());
-            this.arrows[i].setPosition(new cc.Point(100 + (Math.random() * 800),
-                700 + Math.random() * 300));
+            this.arrows[i].setPosition(new cc.Point(200 + (Math.random() * 600),
+                800 + Math.random() * 200));
             if (i >= 1) {
-                if (this.arrows[i].getPositionX <= this.arrows[i - 1].getPositionX + 100 &&
-                    this.arrows[i].getPositionX >= this.arrows[i - 1].getPositionX - 100) {
-                    this.arrows[i].setPosition(new cc.Point(100 + (Math.random() * 800),
-                        700 + Math.random() * 300));
+                if (this.arrows[i].getPositionX <= this.arrows[i - 1].getPositionX + 300 &&
+                    this.arrows[i].getPositionX >= this.arrows[i - 1].getPositionX - 300) {
+                    this.arrows[i].setPosition(new cc.Point(200 + (Math.random() * 600),
+                        800 + Math.random() * 200));
                 }
             }
 
@@ -66,30 +66,31 @@ var GameLayer = cc.LayerColor.extend({
 
     onKeyDown: function (keyCode, event) {
 
-        if (keyCode == cc.KEY.left) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 1 && this.arrows[i].getOpacity > 0) {
+        for (var i = 0; i < this.arrows.length; i++) {
+
+            if (keyCode == cc.KEY.left) {
+                if (this.arrows[i].number == 1 && this.arrows[i].getOpacity != 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
+
             }
-        } else if (keyCode == cc.KEY.right) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 2 && this.arrows[i].getOpacity > 0) {
+            if (keyCode == cc.KEY.right) {
+                if (this.arrows[i].number == 2 && this.arrows[i].getOpacity != 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
+
             }
-        } else if (keyCode == cc.KEY.up) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 3 && this.arrows[i].getOpacity > 0) {
+            if (keyCode == cc.KEY.up) {
+                if (this.arrows[i].number == 3 && this.arrows[i].getOpacity != 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
+
             }
-        } else if (keyCode == cc.KEY.down) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 4 && this.arrows[i].getOpacity > 0) {
+            if (keyCode == cc.KEY.down) {
+                if (this.arrows[i].number == 4 && this.arrows[i].getOpacity != 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
@@ -104,8 +105,8 @@ var GameLayer = cc.LayerColor.extend({
             var pos = this.arrows[i];
             if (pos.y <= -100) {
                 this.arrows[i].vy = -0.5;
-                this.arrows[i].setPosition(new cc.Point(100 + (Math.random() * 800),
-                    700 + Math.random() * 300));
+                this.arrows[i].setPosition(new cc.Point(200 + (Math.random() * 600),
+                    800 + Math.random() * 200));
                 this.arrows[i].setOpacity(255);
             }
         }
@@ -121,4 +122,4 @@ var StartScene = cc.Scene.extend({
     }
 });
 
-GameLayer.NUMARROW = 5;
+GameLayer.NUMARROW = 2;
