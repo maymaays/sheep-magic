@@ -68,28 +68,28 @@ var GameLayer = cc.LayerColor.extend({
 
         if (keyCode == cc.KEY.left) {
             for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 1) {
+                if (this.arrows[i].number == 1 && this.arrows[i].getOpacity > 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
             }
         } else if (keyCode == cc.KEY.right) {
             for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 2) {
+                if (this.arrows[i].number == 2 && this.arrows[i].getOpacity > 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
             }
         } else if (keyCode == cc.KEY.up) {
             for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 3) {
+                if (this.arrows[i].number == 3 && this.arrows[i].getOpacity > 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }
             }
         } else if (keyCode == cc.KEY.down) {
             for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number == 4) {
+                if (this.arrows[i].number == 4 && this.arrows[i].getOpacity > 0) {
                     this.arrows[i].setOpacity(0);
                     break;
                 }

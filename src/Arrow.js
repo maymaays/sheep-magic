@@ -3,7 +3,7 @@ var Arrow = cc.Sprite.extend({
         this._super();
         this.random();
         this.started = true;
-        this.vy = -0.1;
+        this.vy = -0.01;
     },
 
     random: function () {
@@ -23,7 +23,7 @@ var Arrow = cc.Sprite.extend({
         var pos = this.getPosition();
         if (this.started) {
             this.setPosition(new cc.Point(pos.x, pos.y + this.vy));
-            this.vy -= 0.1;
+            this.vy -= 0.01;
         } else if (!this.started) {
             
         }
