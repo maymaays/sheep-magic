@@ -68,12 +68,12 @@ var GameLayer = cc.LayerColor.extend({
     onKeyDown: function (keyCode, event) {
         
         if (keyCode == cc.KEY.enter) {
-
             for (var i = 0; i < this.arrows.length; i++) {
                 if (this.arrows[i].number % 2 != 0) {
                     this.arrows[i].setOpacity(0);
                 }
             }
+            
         } else if (keyCode == cc.KEY.space) {
             for (var i = 0; i < this.arrows.length; i++) {
                 if (this.arrows[i].number % 2 == 0) {
