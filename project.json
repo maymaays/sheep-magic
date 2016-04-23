@@ -16,7 +16,8 @@
         "src/GameLayer.js",
         "src/Background.js",
         "src/Rabbit.js",
-        "src/Arrow.js"
+        "src/Arrow.js",
+        "src/Heart.js"
 
     ]
 }

@@ -7,12 +7,12 @@ var Arrow = cc.Sprite.extend({
     },
 
     random: function () {
-        this.random = Math.ceil(Math.random() * 4);  
-        if (this.random == 1) {            
+        this.number = Math.ceil(Math.random() * 4);
+        if (this.number == 1) {            
             this.initWithFile('res/images/arrow-left.png');
-        } else if (this.random == 2) {            
+        } else if (this.number == 2) {            
             this.initWithFile('res/images/arrow-right.png');
-        } else if (this.random == 3) {
+        } else if (this.number == 3) {
             this.initWithFile('res/images/arrow-up.png');
         } else {
             this.initWithFile('res/images/arrow-down.png');
@@ -31,10 +31,6 @@ var Arrow = cc.Sprite.extend({
 
     start: function () {
         this.started = true;
-    },
-    
-    remove: function () {
-       this.started = false; 
     }
 
 });
