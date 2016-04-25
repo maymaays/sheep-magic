@@ -15,10 +15,9 @@
         "src/resource.js",
         "src/GameLayer.js",
         "src/Background.js",
-        "src/Rabbit.js",
+        "src/Dragon.js",
         "src/Arrow.js",
-        "src/Heart.js",
-        "src/ArcticEffectBg.js"
+        "src/Heart.js"
 
     ]
 }

@@ -3,19 +3,12 @@ var GameLayer = cc.LayerColor.extend({
     init: function () {
 
         this._super();
+
         this.setPosition(new cc.Point(0, 0));
 
         this.createBackground();
-
         this.createDragon();
-
-        this.heart = new Heart();
-        this.heart.setPosition(new cc.Point(150, 700));
-        this.addChild(this.heart);
-
-        this.arrows = [];
-
-        this.createAnimal();
+        this.createHeart();
 
         this.scheduleUpdate();
         this.addKeyboardHandlers();
@@ -23,22 +16,9 @@ var GameLayer = cc.LayerColor.extend({
 
     },
 
-    createArcticEffect: function () {
-
-        this.arcticEffect = new ArcticEffectBg();
-        this.addChild(this.arcticEffect);
-        this.arcticEffect.setPosition(new cc.Point(800, 400));
-
-    },
-
     createAnimal: function () {
-
-        for (var i = 0; i < GameLayer.NUMARROW; i++) {
-            this.arrows.push(new Arrow);
-            this.arrows[i].position();
-            this.arrows[i].scheduleUpdate();
-            this.addChild(this.arrows[i]);
-        }
+        
+        
     },
 
     createBackground: function () {
@@ -48,12 +28,18 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     createDragon: function () {
-
-        this.rabbit = new Rabbit();
-        this.rabbit.setPosition(new cc.Point(750, 150));
-        this.addChild(this.rabbit, 1);
-        this.rabbit.scheduleUpdate();
+        this.dragon = new Dragon();
+        this.dragon.setPosition(new cc.Point(750, 150));
+        this.addChild(this.dragon, 1);
+        this.dragon.scheduleUpdate();
     },
+
+    createHeart: function () {
+        this.heart = new Heart();
+        this.heart.setPosition(new cc.Point(150, 700));
+        this.addChild(this.heart);
+    },
+
 
     addKeyboardHandlers: function () {
         var self = this;
@@ -65,36 +51,41 @@ var GameLayer = cc.LayerColor.extend({
         }, this);
     },
 
-    onKeyDown: function (keyCode, event) {
-        
-        if (keyCode == cc.KEY.enter) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number % 2 != 0) {
-                    this.arrows[i].setOpacity(0);
-                }
-            }
-            
-        } else if (keyCode == cc.KEY.space) {
-            for (var i = 0; i < this.arrows.length; i++) {
-                if (this.arrows[i].number % 2 == 0) {
-                    this.arrows[i].setOpacity(0);
-                }
-            }
-        }
-    },
+    onKeyDown: function (keyCode, event) {},
 
     onKeyUp: function (keyCode, event) {},
 
+    minimumOfPositionY: function () {
+        for (var i = 1; i < 9; i++) {
+            if (i % 2 != 2) {
+                if (i == 1) {
+                    this.minimumOfArctic = this.animals[i].getPositionY;
+                } else if (i > 1 &&
+                    this.arrows[i - 1].getPositionY() < this.arrows[i].getPositionY()) {
+                    this.minimumOfArctic = this.animals[i - 1].getPositionY();
+                }
+            } else if (i % 2 == 2) {
+                if (i == 1) {
+                    this.minimumOfFlat = this.animals[i].getPositionY;
+                } else if (i > 1 &&
+                    this.arrows[i - 1].getPositionY() < this.arrows[i].getPositionY()) {
+                    this.minimumOfFlat = this.animals[i - 1].getPositionY();
+                }
+            }
+        }
+        if (this.minimumOfArctic < this.minimumOfFlat) {
+            return this.minimumOfArctic;
+        } else if (this.minimumOfFlat < this.minimumOfArctic) {
+            return this.minimumOfFlat;
+        }
+    },
 
     update: function () {
-
-
-        for (var i = 0; i < this.arrows.length; i++) {
-            var pos = this.arrows[i];
+        for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            var pos = this.animals;
             if (pos.y <= -100) {
-                this.arrows[i].vy = -0.5;
-                this.arrows[i].position();
-                this.arrows[i].setOpacity(255);
+                this.animals.vy = -0.5;
+                this.animals.position();
             }
         }
     }
@@ -109,4 +100,4 @@ var StartScene = cc.Scene.extend({
     }
 });
 
-GameLayer.NUMARROW = 4;
+GameLayer.NUMANIMALS = 9;

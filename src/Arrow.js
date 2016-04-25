@@ -1,45 +1,38 @@
 var Arrow = cc.Sprite.extend({
     ctor: function () {
         this._super();
-        this.random();
-        this.position();
-        this.started = true;
+
+        this.animals = [];
+        for (var i = 1; i < 9; i++) {
+            this.createAnimals();
+        }
         this.vy = -0.01;
+        this.started = true;
+
     },
 
-    random: function () {
+    createAnimals: function () {
 
-        this.random = Math.ceil(Math.random() * 2);
-
-        if (this.random == 1) {
-            this.number = Math.ceil(Math.random() * 4);
-            if (this.number == 1) {  
-                /* arctic */
-                this.initWithFile('res/images/penguin.png');
-            } else if (this.number == 2) {
-                this.initWithFile('res/images/panda.png');
-            } else if (this.number == 3) {  
-                /* arctic */
-                this.initWithFile('res/images/bear.png');
-            } else if (this.number == 4) {
-                this.initWithFile('res/images/raindear.png');
-            }
-
-        } else if (this.random == 2) {
-
-            this.number = Math.ceil(Math.random() * 4);
-            if (this.number == 1) {
-                /* arctic */
-                this.initWithFile('res/images/dog.png');
-            } else if (this.number == 2) {
-                this.initWithFile('res/images/fox.png');
-            } else if (this.number == 3) {
-                /* arctic */
-                this.initWithFile('res/images/seal.png');
-            } else if (this.number == 4) {
-                this.initWithFile('res/images/panda.png');
-            }
+        if (i == 1) {  
+            this.initWithFile('res/images/penguin.png');
+        } else if (i == 2) {
+            this.initWithFile('res/images/panda.png');
+        } else if (i == 3) {  
+            this.initWithFile('res/images/bear.png');
+        } else if (i == 4) {
+            this.initWithFile('res/images/raindear.png');
+        } else if (i == 5) {
+            this.initWithFile('res/images/dog.png');
+        } else if (i == 6) {
+            this.initWithFile('res/images/fox.png');
+        } else if (i == 7) {
+            this.initWithFile('res/images/seal.png');
+        } else if (i == 8) {
+            this.initWithFile('res/images/panda.png');
         }
+        this.addChild(this.animal);
+        this.animals.push(this.animals);
+
     },
 
     randomPositionOfX: function () {
@@ -56,10 +49,10 @@ var Arrow = cc.Sprite.extend({
     },
 
     update: function (dt) {
-        var pos = this.getPosition();
         if (this.started) {
+            var pos = this.getPosition();
             this.setPosition(new cc.Point(pos.x, pos.y + this.vy));
-            this.vy -= 0.01;
+            this.vy -= 0.04;
         }
     },
 
