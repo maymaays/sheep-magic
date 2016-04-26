@@ -12,7 +12,7 @@ var GameLayer = cc.LayerColor.extend({
 
         this.scheduleUpdate();
         this.addKeyboardHandlers();
-        
+
         this.animals = [];
         for (var i = 1; i < 9; i++) {
             this.animals[i] = new Arrow();
@@ -21,7 +21,7 @@ var GameLayer = cc.LayerColor.extend({
             this.addChild(this.animals[i]);
             this.animals[i].scheduleUpdate();
         }
-        
+
         return true;
 
     },
@@ -62,7 +62,58 @@ var GameLayer = cc.LayerColor.extend({
         }, this);
     },
 
-    onKeyDown: function (keyCode, event) {},
+    onKeyDown: function (keyCode, event) {
+
+        if (keyCode == cc.KEY.a) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 1) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        } else if (keyCode == cc.KEY.s) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 2) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        } else if (keyCode == cc.KEY.d) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 3) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }  else if (keyCode == cc.KEY.f) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 4) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }  else if (keyCode == cc.KEY.g) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 5) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }  else if (keyCode == cc.KEY.h) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 6) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }  else if (keyCode == cc.KEY.j) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 7) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }  else if (keyCode == cc.KEY.k) {
+            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+                if (i == 8) {
+                    this.animals[i].setOpacity(0);
+                }
+            }
+        }
+    },
 
     onKeyUp: function (keyCode, event) {},
 
@@ -96,6 +147,7 @@ var GameLayer = cc.LayerColor.extend({
             var pos = this.animals[i];
             if (pos.y <= -100) {
                 this.animals[i].vy = -0.5;
+                this.animals[i].setOpacity(255);
                 this.animals[i].position();
             }
         }

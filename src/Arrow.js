@@ -8,26 +8,26 @@ var Arrow = cc.Sprite.extend({
     createAnimals: function (i) {
 
         if (i == 1) {  
-            this.initWithFile('res/images/penguin.png');
+            this.initWithFile('res/images/owl.png');
         } else if (i == 2) {
-            this.initWithFile('res/images/panda.png');
+            this.initWithFile('res/images/fox.png');
         } else if (i == 3) {  
-            this.initWithFile('res/images/bear.png');
+            this.initWithFile('res/images/mk.png');
         } else if (i == 4) {
             this.initWithFile('res/images/raindear.png');
         } else if (i == 5) {
-            this.initWithFile('res/images/dog.png');
+            this.initWithFile('res/images/duck.png');
         } else if (i == 6) {
-            this.initWithFile('res/images/fox.png');
+            this.initWithFile('res/images/bee.png');
         } else if (i == 7) {
             this.initWithFile('res/images/seal.png');
         } else if (i == 8) {
-            this.initWithFile('res/images/panda.png');
+            this.initWithFile('res/images/dog.png');
         }
     },
 
     randomPositionOfX: function () {
-        return Math.ceil(Math.random() * 4);
+        return Math.ceil(Math.random() * 6);
     },
 
     randomPositionOfY: function () {
@@ -35,7 +35,7 @@ var Arrow = cc.Sprite.extend({
     },
 
     position: function () {
-        this.setPosition(new cc.Point(200 + (this.randomPositionOfX() * Math.random() * 300),
+        this.setPosition(new cc.Point(200 + (this.randomPositionOfX() * Math.random() * 200),
             800 + (this.randomPositionOfY() * Math.random() * 300)));
     },
 
@@ -43,7 +43,7 @@ var Arrow = cc.Sprite.extend({
         if (this.started) {
             var pos = this.getPosition();
             this.setPosition(new cc.Point(pos.x, pos.y + this.vy));
-            this.vy -= 0.04;
+            this.vy -= 0.003;
         }
     },
 
