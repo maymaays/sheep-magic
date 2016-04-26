@@ -1,17 +1,11 @@
 var Arrow = cc.Sprite.extend({
     ctor: function () {
         this._super();
-
-        this.animals = [];
-        for (var i = 1; i < 9; i++) {
-            this.createAnimals();
-        }
         this.vy = -0.01;
         this.started = true;
-
     },
 
-    createAnimals: function () {
+    createAnimals: function (i) {
 
         if (i == 1) {  
             this.initWithFile('res/images/penguin.png');
@@ -30,9 +24,6 @@ var Arrow = cc.Sprite.extend({
         } else if (i == 8) {
             this.initWithFile('res/images/panda.png');
         }
-        this.addChild(this.animal);
-        this.animals.push(this.animals);
-
     },
 
     randomPositionOfX: function () {

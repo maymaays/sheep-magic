@@ -12,13 +12,24 @@ var GameLayer = cc.LayerColor.extend({
 
         this.scheduleUpdate();
         this.addKeyboardHandlers();
+        
+        this.animals = [];
+        for (var i = 1; i < 9; i++) {
+            this.animals[i] = new Arrow();
+            this.animals[i].createAnimals(i);
+            this.animals[i].position();
+            this.addChild(this.animals[i]);
+            this.animals[i].scheduleUpdate();
+        }
+        
         return true;
 
     },
 
     createAnimal: function () {
-        
-        
+        this.animal = new Arrow();
+        this.animal.position();
+        this.addChild(this.animal);
     },
 
     createBackground: function () {
@@ -82,10 +93,10 @@ var GameLayer = cc.LayerColor.extend({
 
     update: function () {
         for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
-            var pos = this.animals;
+            var pos = this.animals[i];
             if (pos.y <= -100) {
-                this.animals.vy = -0.5;
-                this.animals.position();
+                this.animals[i].vy = -0.5;
+                this.animals[i].position();
             }
         }
     }
