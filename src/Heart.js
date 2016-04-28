@@ -1,23 +1,33 @@
-var Heart = cc.Node.extend({
-    
+var Heart = cc.Sprite.extend({
+
     ctor: function () {
         this._super();
-        this.positionOfX = 0;
-        this.hearts = [];
-        for (var i = 0; i < 3; i++) {
-            this.createHeart();
-        }
+        this.initWithFile('res/images/heart1.png');
     },
 
 
     update: function () {},
 
-    createHeart: function () {
-        this.heart = cc.Sprite.create();
-        this.heart.setPosition(this.positionOfX, 0);
-        this.heart.initWithFile('res/images/heart1.png');
-        this.addChild(this.heart);
-        this.hearts.push(this.heart);
-        this.positionOfX += 100;
+    positionOfHeart: function (i) {
+        if (i == 1) {
+            this.setPosition(new cc.Point(150, 900));
+        } else if (i == 2) {
+            this.setPosition(new cc.Point(250, 900));
+        } else if (i == 3) {
+            this.setPosition(new cc.Point(350, 900));
+        }
+    },
+
+    setHearTexture: function () {
+        this.setTexture('res/images/heart1.png');
+    },
+    
+    setDeadTexture: function () {
+        this.setTexture('res/images/heartwithdead.png');
     }
+
+
+
 });
+
+Heart.NUMHEART = 4;

@@ -3,54 +3,58 @@ var GameLayer = cc.LayerColor.extend({
     init: function () {
 
         this._super();
-
         this.setPosition(new cc.Point(0, 0));
 
         this.createBackground();
         this.createDragon();
         this.createHeart();
+        this.createSetOfAnimals();
+        
+        this.checkStatus();
 
         this.scheduleUpdate();
         this.addKeyboardHandlers();
+        return true;
 
+    },
+
+    createSetOfAnimals: function () {
         this.animals = [];
-        for (var i = 1; i < 9; i++) {
+        for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
             this.animals[i] = new Arrow();
             this.animals[i].createAnimals(i);
             this.animals[i].position();
             this.addChild(this.animals[i]);
             this.animals[i].scheduleUpdate();
         }
-
-        return true;
-
-    },
-
-    createAnimal: function () {
-        this.animal = new Arrow();
-        this.animal.position();
-        this.addChild(this.animal);
     },
 
     createBackground: function () {
-        this.bg = new Background();
-        this.bg.setPosition(new cc.Point(800, 400));
-        this.addChild(this.bg);
+        this.background = new Background();
+        this.background.setPosition(new cc.Point(this.width / 2, this.height / 2));
+        this.addChild(this.background);
     },
 
     createDragon: function () {
         this.dragon = new Dragon();
-        this.dragon.setPosition(new cc.Point(750, 150));
+        this.dragon.setPosition(new cc.Point(950, 150));
         this.addChild(this.dragon, 1);
         this.dragon.scheduleUpdate();
     },
 
     createHeart: function () {
-        this.heart = new Heart();
-        this.heart.setPosition(new cc.Point(150, 700));
-        this.addChild(this.heart);
+        this.hearts = [];
+        for (var i = 1; i < Heart.NUMHEART; i++) {
+            this.hearts[i] = new Heart();
+            this.hearts[i].positionOfHeart(i);
+            this.addChild(this.hearts[i]);
+        }
+        return this.hearts;
     },
 
+    checkStatus: function () {
+        this.isAlive = this.createHeart();
+    },
 
     addKeyboardHandlers: function () {
         var self = this;
@@ -64,50 +68,37 @@ var GameLayer = cc.LayerColor.extend({
 
     onKeyDown: function (keyCode, event) {
 
-        if (keyCode == cc.KEY.a) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+        for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+
+            if (keyCode == cc.KEY.a) {
                 if (i == 1) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        } else if (keyCode == cc.KEY.s) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.s) {
                 if (i == 2) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        } else if (keyCode == cc.KEY.d) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.d) {
                 if (i == 3) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        }  else if (keyCode == cc.KEY.f) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.f) {
                 if (i == 4) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        }  else if (keyCode == cc.KEY.g) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.g) {
                 if (i == 5) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        }  else if (keyCode == cc.KEY.h) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.h) {
                 if (i == 6) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        }  else if (keyCode == cc.KEY.j) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.j) {
                 if (i == 7) {
                     this.animals[i].setOpacity(0);
                 }
-            }
-        }  else if (keyCode == cc.KEY.k) {
-            for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+            } else if (keyCode == cc.KEY.k) {
                 if (i == 8) {
                     this.animals[i].setOpacity(0);
                 }
@@ -118,7 +109,7 @@ var GameLayer = cc.LayerColor.extend({
     onKeyUp: function (keyCode, event) {},
 
     minimumOfPositionY: function () {
-        for (var i = 1; i < 9; i++) {
+        for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
             if (i % 2 != 2) {
                 if (i == 1) {
                     this.minimumOfArctic = this.animals[i].getPositionY;
@@ -135,22 +126,36 @@ var GameLayer = cc.LayerColor.extend({
                 }
             }
         }
-        if (this.minimumOfArctic < this.minimumOfFlat) {
-            return this.minimumOfArctic;
-        } else if (this.minimumOfFlat < this.minimumOfArctic) {
-            return this.minimumOfFlat;
-        }
     },
 
     update: function () {
+
         for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+
             var pos = this.animals[i];
+            if (this.animals[i].getOpacity() != 0 && pos.y <= 200) {
+                if (Heart.NUMHEART >= 1) {
+                    this.isAlive[Heart.NUMHEART - 1].setDeadTexture();
+                }
+            }
             if (pos.y <= -100) {
                 this.animals[i].vy = -0.5;
                 this.animals[i].setOpacity(255);
-                this.animals[i].position();
+                this.animals[i].position(i);
+                Heart.NUMHEART--;
             }
         }
+    },
+    
+//    isAlive: function () {
+//        for (var i = 0; i < GameLayer.NUMANIMALS; i++) {
+//            
+//        }       this.start = true;
+//    },
+    
+    over: function () {
+        
+        this.start = false;
     }
 });
 

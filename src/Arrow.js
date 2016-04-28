@@ -20,30 +20,31 @@ var Arrow = cc.Sprite.extend({
         } else if (i == 6) {
             this.initWithFile('res/images/bee.png');
         } else if (i == 7) {
-            this.initWithFile('res/images/seal.png');
+            this.initWithFile('res/images/fox-a.png');
         } else if (i == 8) {
-            this.initWithFile('res/images/dog.png');
+            this.initWithFile('res/images/panda.png');
         }
     },
 
-    randomPositionOfX: function () {
-        return Math.ceil(Math.random() * 6);
-    },
-
     randomPositionOfY: function () {
-        return Math.ceil(Math.random() * 2);
+        return Math.ceil(Math.random() * 5);
     },
 
     position: function () {
-        this.setPosition(new cc.Point(200 + (this.randomPositionOfX() * Math.random() * 200),
-            800 + (this.randomPositionOfY() * Math.random() * 300)));
+        
+        this.setPosition(new cc.Point(250 * (this.randomPositionOfX()),
+            1000 + (this.randomPositionOfY() * Math.random() * 200)));
+    },
+
+    randomPositionOfX: function () {
+        return Math.ceil(Math.random() * 8);
     },
 
     update: function (dt) {
         if (this.started) {
             var pos = this.getPosition();
             this.setPosition(new cc.Point(pos.x, pos.y + this.vy));
-            this.vy -= 0.003;
+            this.vy -= 0.008;
         }
     },
 
