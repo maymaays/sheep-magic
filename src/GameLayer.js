@@ -94,6 +94,7 @@ var GameLayer = cc.LayerColor.extend({
 
     gameOverLayer: function () {
         cc.audioEngine.playEffect('res/sounds/beep-01a.mp3');
+        cc.audioEngine.playEffect('res/sounds/Gameover.mp3');
         cc.audioEngine.playMusic('res/sounds/Music for Funeral Home - Part 11.mp3');
         this.over = new GameoverBg();
         this.over.setPosition(new cc.Point(this.width / 2, 350));
