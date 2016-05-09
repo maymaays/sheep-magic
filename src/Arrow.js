@@ -25,7 +25,7 @@ var Arrow = cc.Sprite.extend({
     },
     
     randomPositionOfX: function () {
-        return Math.ceil(Math.random() * 8);
+        return Math.ceil(Math.random() * 7);
     },
     
     randomPositionOfY: function () {

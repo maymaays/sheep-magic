@@ -203,16 +203,19 @@ var GameLayer = cc.LayerColor.extend({
     updateAlive: function () {
         if (this.start) {
             for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
-
+                
                 var pos = this.animals[i];
-
                 this.updateScore();
 
-                if (this.animals[i].getOpacity() != 0 && pos.y <= 200) {
+                if (this.animals[i].getOpacity() == 255 && (pos.y <= 100 && pos.y > 0)) {
+                    
+
                     if (Heart.NUMHEART > 1) {
                         this.isAlive[Heart.NUMHEART - 1].setDeadTexture();
-                        Heart.NUMHEART--;
-                       break;
+                        if (Heart.NUMHEART >= 1) {
+                            Heart.NUMHEART--;
+                        }
+
                     } else {
                         this.start = false;
                         this.removeAllChildren();
@@ -220,12 +223,11 @@ var GameLayer = cc.LayerColor.extend({
                         this.finalScoreLabel();
                         this.status = GameLayer.PAGESTATUS.over;
                     }
-                }
-
-                if (pos.y <= -100) {
+                    
+                } else if (pos.y <= -100) {
                     this.animals[i].vy = -0.05;
                     this.animals[i].setOpacity(255);
-                    this.animals[i].position(i);
+                    this.animals[i].position();
                 }
             }
         }
@@ -241,7 +243,7 @@ var StartScene = cc.Scene.extend({
     }
 });
 
-GameLayer.NUMANIMALS = 9;
+GameLayer.NUMANIMALS = 8;
 
 GameLayer.PAGESTATUS = {
     startpage: 1,
