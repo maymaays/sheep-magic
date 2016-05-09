@@ -1,7 +1,7 @@
 var Arrow = cc.Sprite.extend({
     ctor: function () {
         this._super();
-        this.vy = -0.01;
+        this.vy = -0.001;
         this.started = true;
     },
 
@@ -21,8 +21,6 @@ var Arrow = cc.Sprite.extend({
             this.initWithFile('res/images/bee.png');
         } else if (i == 7) {
             this.initWithFile('res/images/fox-a.png');
-        } else if (i == 8) {
-            this.initWithFile('res/images/panda.png');
         }
     },
 
@@ -31,8 +29,8 @@ var Arrow = cc.Sprite.extend({
     },
 
     position: function () {
-        
-        this.setPosition(new cc.Point(250 * (this.randomPositionOfX()),
+
+        this.setPosition(new cc.Point(200 * (this.randomPositionOfX()),
             1000 + (this.randomPositionOfY() * Math.random() * 200)));
     },
 

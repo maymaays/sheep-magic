@@ -26,8 +26,6 @@ var Heart = cc.Sprite.extend({
         this.setTexture('res/images/heartwithdead.png');
     }
 
-
-
 });
 
 Heart.NUMHEART = 4;

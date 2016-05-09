@@ -3,7 +3,7 @@
 
     "debugMode" : 1,
     "showFPS" : true,
-    "frameRate" : 60,
+    "frameRate" : 70,
     "noCache" : false,
     "id" : "gameCanvas",
     "renderMode" : 0,
@@ -17,7 +17,11 @@
         "src/Background.js",
         "src/Dragon.js",
         "src/Arrow.js",
-        "src/Heart.js"
+        "src/Heart.js",
+        "src/GameoverBg.js",
+        "src/StartBg.js",
+        "src/HowToPlay.js",
+        "src/AdditionalHowTo.js"
 
     ]
 }
