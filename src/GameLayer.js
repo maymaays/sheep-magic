@@ -48,7 +48,7 @@ var GameLayer = cc.LayerColor.extend({
         for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
             this.animals[i] = new Arrow();
             this.animals[i].createAnimals(i);
-            this.animals[i].position(i);
+            this.animals[i].position();
             this.addChild(this.animals[i]);
             this.animals[i].scheduleUpdate();
         }
@@ -103,6 +103,10 @@ var GameLayer = cc.LayerColor.extend({
         }, this);
     },
 
+    click: function () {
+        cc.audioEngine.playEffect('res/sounds/button-30.mp3');
+    },
+
     onKeyDown: function (keyCode, event) {
 
         for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
@@ -110,38 +114,47 @@ var GameLayer = cc.LayerColor.extend({
             if (keyCode == cc.KEY.a) {
                 if (i == 1) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.s) {
                 if (i == 2) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.d) {
                 if (i == 3) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.f) {
                 if (i == 4) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.g) {
                 if (i == 5) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.h) {
                 if (i == 6) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.j) {
                 if (i == 7) {
                     this.animals[i].setOpacity(0);
+                    this.click();
                 }
             } else if (keyCode == cc.KEY.enter) {
                 if (this.status == GameLayer.PAGESTATUS.howtofirst) {
+                    cc.audioEngine.playEffect('res/sounds/button-32.mp3');
                     this.startGame();
                     this.status = GameLayer.PAGESTATUS.play;
                 }
             } else if (keyCode == cc.KEY.space) {
                 if (this.status == GameLayer.PAGESTATUS.over) {
+                    cc.audioEngine.playEffect('res/sounds/button-32.mp3');
                     Heart.NUMHEART = 4;
                     StartBg.status = 0;
                     this.start = false;
@@ -156,10 +169,12 @@ var GameLayer = cc.LayerColor.extend({
     checkBackgroundStatus: function () {
 
         if (StartBg.status == 1 && this.status == 1) {
+            cc.audioEngine.playEffect('res/sounds/button-32.mp3');
             this.startGame();
             this.status = GameLayer.PAGESTATUS.playfirst;
         }
         if (StartBg.status == 2 && this.status == 1) {
+            cc.audioEngine.playEffect('res/sounds/button-32.mp3');
             this.createHowTo();
             this.status = GameLayer.PAGESTATUS.howtofirst;
         }
@@ -170,26 +185,41 @@ var GameLayer = cc.LayerColor.extend({
         this.updateAlive();
     },
 
+    finalScoreLabel: function () {
+        this.totalscore = cc.LabelTTF.create('Your Score : ' + Math.round(this.score),
+            'Steelworks Vintage Demo', 140);
+        this.totalscore.setPosition(new cc.Point(this.width / 2, 850));
+        this.addChild(this.totalscore);
+    },
+
+    gameOverLayer: function () {
+        cc.audioEngine.playEffect('res/sounds/beep-01a.mp3');
+        cc.audioEngine.playMusic('res/sounds/Music for Funeral Home - Part 11.mp3');
+        this.over = new GameoverBg();
+        this.over.setPosition(new cc.Point(this.width / 2, 350));
+        this.addChild(this.over);
+    },
+
     updateAlive: function () {
         if (this.start) {
             for (var i = 1; i < GameLayer.NUMANIMALS; i++) {
+
                 var pos = this.animals[i];
+
                 this.updateScore();
-                console.log("arai wa" + Heart.NUMHEART);
+
                 if (this.animals[i].getOpacity() != 0 && pos.y <= 200) {
                     if (Heart.NUMHEART > 1) {
                         this.isAlive[Heart.NUMHEART - 1].setDeadTexture();
+                        Heart.NUMHEART--;
+                       break;
                     } else {
                         this.start = false;
                         this.removeAllChildren();
-                        this.over = new GameoverBg();
-                        this.over.setPosition(new cc.Point(this.width / 2, 350));
-                        this.addChild(this.over);
+                        this.gameOverLayer();
+                        this.finalScoreLabel();
                         this.status = GameLayer.PAGESTATUS.over;
                     }
-                    console.log("arai bf" + Heart.NUMHEART);
-                    Heart.NUMHEART--;
-                    console.log("arai af" + Heart.NUMHEART);
                 }
 
                 if (pos.y <= -100) {
@@ -212,6 +242,7 @@ var StartScene = cc.Scene.extend({
 });
 
 GameLayer.NUMANIMALS = 9;
+
 GameLayer.PAGESTATUS = {
     startpage: 1,
     playfirst: 2,

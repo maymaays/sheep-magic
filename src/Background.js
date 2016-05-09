@@ -1,8 +1,12 @@
+
 var Background = cc.Sprite.extend({
     ctor: function () {
         this._super();
-        this.bg = cc.Sprite.create('res/images/sweet-candy-bg.jpg');
-        this.bg.setPosition(new cc.Point(0, 0));
-        this.addChild(this.bg);
-    }
+        var animation = new cc.Animation.create();
+        animation.addSpriteFrameWithFile('res/images/sweet-candy-bg2.jpg');
+        animation.addSpriteFrameWithFile('res/images/sweet-candy-bg3.jpg');
+        animation.setDelayPerUnit(0.8);
+        var movingAction = cc.RepeatForever.create(cc.Animate.create(animation));
+        this.runAction(movingAction);
+    },
 });

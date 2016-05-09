@@ -23,19 +23,18 @@ var Arrow = cc.Sprite.extend({
             this.initWithFile('res/images/fox-a.png');
         }
     },
-
+    
+    randomPositionOfX: function () {
+        return Math.ceil(Math.random() * 8);
+    },
+    
     randomPositionOfY: function () {
         return Math.ceil(Math.random() * 5);
     },
 
     position: function () {
-
-        this.setPosition(new cc.Point(200 * (this.randomPositionOfX()),
+        this.setPosition(new cc.Point(250 * (this.randomPositionOfX()),
             1000 + (this.randomPositionOfY() * Math.random() * 200)));
-    },
-
-    randomPositionOfX: function () {
-        return Math.ceil(Math.random() * 8);
     },
 
     update: function (dt) {
