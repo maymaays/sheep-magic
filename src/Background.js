@@ -8,5 +8,5 @@ var Background = cc.Sprite.extend({
         animation.setDelayPerUnit(0.8);
         var movingAction = cc.RepeatForever.create(cc.Animate.create(animation));
         this.runAction(movingAction);
-    },
+    }
 });
