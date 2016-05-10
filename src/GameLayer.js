@@ -18,6 +18,10 @@ var GameLayer = cc.LayerColor.extend({
         this.createAdditionHowTo();
         this.createScore();
         this.checkStatus();
+        this.musicbackground();
+    },
+
+    musicbackground: function () {
         cc.audioEngine.playMusic('res/sounds/Carefree.mp3');
     },
 
